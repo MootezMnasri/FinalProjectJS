@@ -1,10 +1,12 @@
 import express from 'express';
 import { MongoClient, ObjectId } from 'mongodb';
+import sentimentRoutes from './routes/sentiment.js';
 
 const app = express();
 const port = process.env.API_PORT || 5000;
 
 app.use(express.json());
+app.use('/sentiment', sentimentRoutes);
 
 const getDbCollection = async () => {
   const uri = process.env.MONGODB_URI || 'mongodb://giftlink-mongo:27017';
