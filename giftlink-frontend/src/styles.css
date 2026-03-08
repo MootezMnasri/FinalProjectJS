@@ -1,0 +1,25 @@
+/* Global styles for React app, can extend with your design system */
+:root {
+  --primary-color: #2ecc71;
+  --primary-dark: #27ae60;
+  --secondary-color: #3498db;
+  --text-dark: #2c3e50;
+  --text-light: #7f8c8d;
+  --bg: #f9f9f9;
+  --white: #fff;
+}
+
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; color:var(--text-dark); }
+.gl-navbar { display:flex; gap:1rem; padding:1rem; background:#fff; border-bottom:1px solid #eee; }
+.gl-nav-link { color:#333; text-decoration:none; padding:0.5rem 1rem; border-radius:4px; }
+.gl-nav-link:hover { background:#f0f0f0; }
+.gl-main { padding:2rem; max-width:1200px; margin:0 auto; }
+.gl-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:1rem; }
+.gl-card { border:1px solid #eee; border-radius:8px; overflow:hidden; background:#fff; display:flex; flex-direction:column; }
+.gl-image { width:100%; height:150px; object-fit:cover; }
+.gl-content { padding:0.75rem; }
+.gl-title { font-size:1.05rem; margin:0 0 0.25rem; }
+.gl-desc { color:#555; font-size:0.9rem; }
+.gl-meta { color:#777; font-size:0.8rem; }
+.loading { text-align:center; padding:2rem; }
+.no-results { text-align:center; padding:2rem; color:#666; }
