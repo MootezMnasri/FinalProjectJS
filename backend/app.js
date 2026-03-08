@@ -1,5 +1,6 @@
 const express = require('express');
 const giftsRouter = require('./routes/gifts');
+const searchRouter = require('./routes/searchRoutes');
 const { connectDb } = require('./db');
 
 const app = express();
@@ -9,6 +10,7 @@ app.use(express.json());
 
 // API routes
 app.use('/api', giftsRouter);
+app.use('/api', searchRouter);
 
 // Health check
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
