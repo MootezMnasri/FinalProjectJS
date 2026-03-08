@@ -1,0 +1,46 @@
+version: '3.9'
+services:
+  mongo:
+    image: mongo:6
+    container_name: giftlink-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+
+  seed:
+    image: node:20-slim
+    container_name: giftlink-seed
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://giftlink-mongo:27017
+      - MONGO_DB_NAME=giftlink
+      - MONGO_COLLECTION=gifts
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["node", "scripts/populateMongo.js"]
+    # Do not run automatically on compose up; seed explicitly with: docker-compose run seed
+    restart: "no"
+
+  api:
+    image: node:20-slim
+    container_name: giftlink-api
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://giftlink-mongo:27017
+      - MONGO_DB_NAME=giftlink
+      - MONGO_COLLECTION=gifts
+    volumes:
+      - .:/app
+    working_dir: /app/api-server
+    command: ["bash", "-lc", "npm install --silent && node index.js"]
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
